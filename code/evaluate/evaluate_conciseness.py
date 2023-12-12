@@ -39,6 +39,7 @@ Criteria:
 4. Excellent (4 points): The model's response is highly concise and short, containing only necessary and relevant information without any unnecessary details or explanations.
 
 When evaluating each score based on above criteria, ensure that each judgement is not affected by other model's response.
+However, you can compare each model's responses in terms of relative verbosity and response length when scoring each response.
 First line must contain only {num_samples} values, which indicate the score for each model, respectively.
 The {num_samples} scores are separated by a space.
 Output scores without explanation.
