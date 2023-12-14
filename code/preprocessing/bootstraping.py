@@ -235,7 +235,7 @@ async def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--input_path")
     parser.add_argument("--save_path")
-    parser.add_argument("--request_url")
+    parser.add_argument("--request_url", default="https://api.openai.com/v1/chat/completions")
     parser.add_argument("--api_key")
     parser.add_argument("--max_requests_per_minute", type=int, default=3_000 * 0.5)
     parser.add_argument("--max_tokens_per_minute", type=int, default=250_000 * 0.5)
