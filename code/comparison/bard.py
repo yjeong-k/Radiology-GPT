@@ -1,6 +1,6 @@
 # Get answers from Bard baseline model for comparison
 # Input : a CSV file with a column containing answer-generating prompts
-# Output : a CSV file with a newly added column conatining each corresponding answer for the prompts
+# Output : a CSV file with a newly added column containing each corresponding answer for the prompts
 
 from bardapi import BardCookies
 import pandas as pd
