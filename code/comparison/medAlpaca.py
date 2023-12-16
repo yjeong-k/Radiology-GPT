@@ -2,7 +2,7 @@
 # Input : a CSV file with a column containing answer-generating prompts
 # Output : a CSV file with a newly added column conatining each corresponding answer for the prompts
 
-from transformers import pipeline
+from transformers import pipeline, AutoTokenizer
 import argparse
 import pandas as pd
 
@@ -17,7 +17,14 @@ def parse_args():
 def main():
     args = parse_args()
     df = pd.read_csv(args.input_path)
-    medAlpaca_pl = pipeline("text-generation", model="medalpaca/medalpaca-7b", tokenizer="medalpaca/medalpaca-7b", max_new_tokens=1024)
+
+    # Custom tokenizer, since we have long input sequence(prompt)!
+    tokenizer = AutoTokenizer.from_pretrained("medalpaca/medalpaca-7b")
+    # Set the maximum input sequence length
+    max_input_length = 1024  # originally it is 512
+    tokenizer.model_max_length = max_input_length
+
+    medAlpaca_pl = pipeline("text-generation", model="medalpaca/medalpaca-7b", tokenizer=tokenizer, max_new_tokens=1024)
 
     for index, row in df.iterrows():
         prompt = row['prompt']
@@ -37,4 +44,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
