@@ -1,6 +1,6 @@
 # Get answers from PMC-Llama baseline model for comparison
 # Input : a CSV file with a column containing answer-generating prompts
-# Output : a CSV file with a newly added column conatining each corresponding answer for the prompts
+# Output : a CSV file with a newly added column containing each corresponding answer for the prompts
 
 from transformers import LlamaTokenizer, LlamaForCausalLM
 import torch
