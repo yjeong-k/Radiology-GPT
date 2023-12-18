@@ -13,14 +13,22 @@
 Dockerfile을 사용하시면 됩니다.
 
 - Docker Image Build
-```sh
+```bash
 docker build -t hippo:latest .
 ```
 
-- Docker Container 실행
-```sh
-docker docker run -v MOUNT_PATH:/workspace --gpus GPU_NUM -it --name "hippo" hippo:latest
+- Docker Run Container
+```bash
+docker run -v MOUNT_PATH:/workspace --gpus GPU_NUM -it --name "hippo" hippo:latest
 ```
+"hippo"는 컨테이너의 이름, hippo:latest는 이미지 이름입니다.
+
+- Container 재사용
+실행중인 컨테이너에 재진입하여 작업하는 경우, 다음의 명령어를 사용하시면 됩니다.
+```bash
+docker exec -it hippo /bin/bash
+```
+hippo는 실행중인 컨테이너의 이름입니다.
 
 ### Data Preprocessing
 
@@ -28,30 +36,30 @@ docker docker run -v MOUNT_PATH:/workspace --gpus GPU_NUM -it --name "hippo" hip
 
 ### Fine Tuning
 
-Huggingface에서 Llama 모델을 사용할 때 CLI login을 해야 합니다.
-Huggingface 계정에서 token을 발급받아 사용하시면 됩니다.
-이 때 명령어는 다음과 같습니다. 
-```sh
-$ huggingface-cli login
-$ YOUR_HF_TOKEN
-$ n ## git credential
+Huggingface에서 Llama 모델을 사용할 때 CLI login을 해야 합니다.  
+Huggingface 계정에서 token을 발급받아 사용하시면 됩니다.  
+이 때 명령어는 다음과 같습니다.  
+```bash
+huggingface-cli login
+YOUR_HF_TOKEN
+n ## git credential
 ```
 
-fine tuning에는 다음의 명령어를 사용합니다. 파라미터의 값은 조정하시면 됩니다.
+fine tuning에는 다음의 명령어를 사용합니다. 파라미터의 값은 조정하시면 됩니다.  
 
-```sh
+```bash
 python fine_tuning.py --model_name_or_path "meta-llama/Llama-2-7b-chat-hf" --data_path TRAINING_DATA_PATH --output_dir CKPT_OUTPUT_PATH --num_train_epochs 3 --per_device_train_batch_size 4 --per_device_eval_batch_size 1 --gradient_accumulation_steps 8 --evaluation_strategy "no" --save_strategy "epoch" --learning_rate 2e-4 --weight_decay 0. --warmup_ratio 0.03 --lr_scheduler_type "cosine" --logging_steps 1 --model_max_length 4096 --gradient_checkpointing True --ddp_timeout 18000
 ```
 
 ### Inference
-학습된 모델을 이용하여 답변을 생성하고자 하는 경우, 다음의 명령어를 사용하시면 됩니다.
+학습된 모델을 이용하여 답변을 생성하고자 하는 경우, 다음의 명령어를 사용하시면 됩니다.  
 
-```sh
+```bash
 python inference.py --ft_path CKPT_PATH
 ```
 
-해당 모듈에서는 학습된 radiology_GPT가 챗봇 형식으로 사용자와 질의응답을 하게 됩니다.
-이전에 이루어졌던 대화를 반영하여 답변을 생성하게 됩니다.
+해당 모듈에서는 학습된 radiology_GPT가 챗봇 형식으로 사용자와 질의응답을 하게 됩니다.  
+이전에 이루어졌던 대화를 반영하여 답변을 생성하게 됩니다.  
 
 
 # Citation
