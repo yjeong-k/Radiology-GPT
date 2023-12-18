@@ -12,8 +12,7 @@ import torch
 import os
 
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
-from transformers import pipeline
-from transformers import TextIteratorStreamer, TextStreamer
+from transformers import TextStreamer
 from peft import PeftModel
 
 ## Constant
