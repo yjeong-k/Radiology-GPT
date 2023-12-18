@@ -24,7 +24,7 @@ from peft import get_peft_model, LoraConfig, TaskType, prepare_model_for_kbit_tr
 import torch
 import transformers
 from torch.utils.data import Dataset
-from trl import SFTTrainer
+from trl import Trainer
 
 from utils import *
 
