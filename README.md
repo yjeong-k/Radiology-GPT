@@ -44,7 +44,7 @@ python inference.py --ft_path CKPT_PATH
 # Citation
 
 # Code
-[KAIST Asclepius] (https://github.com/starmpcc/Asclepius).
-[Stanford Alpaca] (https://github.com/tatsu-lab/stanford_alpaca).
-[Open AI] (https://github.com/openai/openai-cookbook/tree/main).
-[Huggingface Llama2 chat demo] (https://huggingface.co/spaces/huggingface-projects/llama-2-7b-chat/blob/main/app.py). 
+[KAIST Asclepius] (https://github.com/starmpcc/Asclepius)  
+[Stanford Alpaca] (https://github.com/tatsu-lab/stanford_alpaca)  
+[Open AI] (https://github.com/openai/openai-cookbook/tree/main)  
+[Huggingface Llama2 chat demo] (https://huggingface.co/spaces/huggingface-projects/llama-2-7b-chat/blob/main/app.py)  
