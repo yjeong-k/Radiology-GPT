@@ -91,20 +91,18 @@ def inference(
     output_text = tokenizer.decode(output_tokens[0], skip_special_tokens = True)
     pattern = re.compile(r"\[INST\].*?\[/INST\]", re.DOTALL)
     output_text = re.sub(pattern, "", output_text)
-    # print(output_text)
     return output_text
 
 def main():
     model, tokenizer = load()
     chat_history = []
+    
     while True:
         prompt = input("Prompt: ")
         if prompt.lower() == "exit":
             break
         response = inference(model, tokenizer, prompt, chat_history, SYSTEM_PROMPT)
         chat_history.append((prompt, response))
-        print("===========")
-        print(chat_history)
 
 if __name__=="__main__":
     main()
