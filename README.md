@@ -2,15 +2,15 @@
 
 ## Introduction
 
-방사선 판독보고서 데이터로 파인튜닝한 의료 도메인의 챗봇입니다.
+방사선 판독보고서 데이터로 파인튜닝한 의료 도메인의 챗봇입니다.  
 
-- [base model: Llama-2-7b-chat-hf] (https://huggingface.co/meta-llama/Llama-2-7b-chat-hf).
-- [dataset: MIMIC-CXR] (https://physionet.org/content/mimic-cxr/2.0.0/).
+- [Base Model: Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf).
+- [Dataset: MIMIC-CXR](https://physionet.org/content/mimic-cxr/2.0.0/).
 - License: 
 
 ## How to Use
 ### Environment
-Dockerfile을 사용하시면 됩니다.
+Dockerfile을 사용하시면 됩니다.  
 
 - Docker Image Build
 ```bash
@@ -21,7 +21,10 @@ docker build -t hippo:latest .
 ```bash
 docker run -v MOUNT_PATH:/workspace --gpus GPU_NUM -it --name "hippo" hippo:latest
 ```
-"hippo"는 컨테이너의 이름, hippo:latest는 이미지 이름입니다.
+* -v 옵션을 지정하여 볼륨을 마운트하였습니다. MOUNT_PATH는 컨테이너에 마운트할 로컬 경로를 의미합니다.  
+* --gpus 옵션을 지정하여 사용할 GPU를 지정할 수 있습니다.  
+* -it 옵션을 지정하여 터미널을 이용하여 컨테이너와 상호작용할 수 있습니다.  
+* "hippo"는 컨테이너의 이름, hippo:latest는 이미지 이름입니다.
 
 - Container 재사용
 실행중인 컨테이너에 재진입하여 작업하는 경우, 다음의 명령어를 사용하시면 됩니다.
@@ -32,7 +35,45 @@ hippo는 실행중인 컨테이너의 이름입니다.
 
 ### Data Preprocessing
 
+MIMIC-CXR 데이터셋에서 방사선 판독보고서 파일인 notes를 전처리합니다.  
+보고서마다 형식이 제각각이기 때문에, 보고서에서 핵심 정보를 담고 있는  
+
+"EXAMINATION", "HISTORY", "INDICATION", "TECHNIQUE",  
+"COMPARISON", "FINDINGS", "IMPRESSION"  
+
+항목을 중심으로 전처리를 수행하였습니다.
+
+```bash
+python preprocess_mimic_cxr --input_path INPUT_PATH --save_path SAVE_PATH
+```
+* input_path: MIMIC-CXR notes 데이터셋이 위치한 경로입니다.  
+* save_path: 전처리된 데이터셋이 저장될 경로입니다.
+
 ### Data Generation
+
+Data Generation은 다음의 단계를 거쳐 이루어집니다.  
+
+1. OpenAI API를 이용하여 instruction을 생성합니다.  
+```bash
+python instruction_generator.py --input_path INPUT_PATH --save_path SAVE_PATH --api_key API_KEY
+```  
+이 때 max_requesets/token_per_minute, max_attemps 등 API 세부 설정을 변경하실 수 있습니다.  
+자세한 것은 코드를 참조하세요!  
+  
+2. API Response에서 생성된 Instruction을 후처리합니다.  
+```bash
+python postproc_question.py --input_path INPUT_PATH --save_path SAVE_PATH
+```  
+  
+3. OpenAI API를 다시 이용하여 후처리한 데이터에 대한 Answer를 생성합니다.  
+```bash
+python answer_generator.py --input_path INPUT_PATH --save_path SAVE_PATH --api_key API_KEY
+```  
+4. 생성한 Instruction-Answer 쌍을 후처리합니다.  
+```bash
+python answer_postprocess.py --input_path INPUT_PATH --save_path SAVE_PATH
+```  
+
 
 ### Fine Tuning
 
