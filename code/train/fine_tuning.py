@@ -7,15 +7,12 @@
 #
 #        http://www.apache.org/licenses/LICENSE-2.0
 
-
-# python train/instruction_ft.py --model_name_or_path "meta-llama/Llama-2-7b-chat-hf" --data_path "/workspace/train/training_data.jsonl" --output_dir "/workspace/train/ft_checkpoint/" --num_train_epochs 2 --per_device_train_batch_size 4 --per_device_eval_batch_size 1 --gradient_accumulation_steps 8 --evaluation_strategy "no" --save_strategy "epoch" --learning_rate 2e-4 --weight_decay 0. --warmup_ratio 0.03 --lr_scheduler_type "cosine" --logging_steps 1 --model_max_length 4096 --gradient_checkpointing True --ddp_timeout 18000
-
 import os
+import sys
+sys.path.append(".")
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 import copy
-import io
-import json
 import logging
 from dataclasses import dataclass
 from typing import Dict, Sequence
@@ -46,13 +43,6 @@ The response should provide the accurate answer to the instruction, while being 
 """
 
 
-def jload(f, mode="r"):
-    """Load a .json file into a dictionary."""
-    if not isinstance(f, io.IOBase):
-        f = open(f, mode=mode)
-    jdict = json.load(f)
-    f.close()
-    return jdict
 
 
 def _tokenize_fn(
