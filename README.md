@@ -1,8 +1,9 @@
 # radiology-GPT
 
 ## Introduction
-<img width="1017" alt="스크린샷 2023-12-19 오후 11 06 40" src="https://github.com/yjeong-k/radiology-GPT/assets/75728717/ac0b19fd-28fc-4922-98ee-5c68354a264a">  
-
+  
+<img width="931" alt="스크린샷 2023-12-19 오후 11 11 06" src="https://github.com/yjeong-k/radiology-GPT/assets/75728717/57dd2882-a012-4130-b752-1dca27ac5f65">
+  
 방사선 판독보고서 데이터로 파인튜닝한 의료 도메인의 챗봇입니다.  
 
 * Base Model: [Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)  
