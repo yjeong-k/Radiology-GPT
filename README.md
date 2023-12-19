@@ -1,10 +1,10 @@
-# radiology-GPT
+# Radiology-GPT
 
 ## Introduction
   
-<img width="931" alt="스크린샷 2023-12-19 오후 11 11 06" src="https://github.com/yjeong-k/radiology-GPT/assets/75728717/57dd2882-a012-4130-b752-1dca27ac5f65">
-  
-방사선 판독보고서 데이터로 파인튜닝한 의료 도메인의 챗봇입니다.  
+<img width="1415" alt="스크린샷 2023-12-19 오후 11 12 10" src="https://github.com/yjeong-k/radiology-GPT/assets/65206075/d64caf7f-c15e-470f-b60a-2c78ace20c84">
+
+Radiology-GPT는 방사선 판독보고서 데이터로 파인튜닝한 의료 도메인의 챗봇입니다. Radiology-GPT는 흉부 x-ray 판독 보고서에 관하여 정보추출, 약어확장, 요약 및 패러프레이징 등의 다양한 clinical task를 수행할 수 있습니다.
 
 * Base Model: [Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)  
 * Dataset: [MIMIC-CXR](https://physionet.org/content/mimic-cxr/2.0.0/) 약 160k개의 노트를 사용하였습니다.  
@@ -49,7 +49,7 @@ MIMIC-CXR 데이터셋에서 방사선 판독보고서 파일인 notes를 전처
 항목을 중심으로 전처리를 수행하였습니다.
 
 ```bash
-python preprocess_mimic_cxr --input_path INPUT_PATH --save_path SAVE_PATH
+python preprocess_mimic_cxr.py --input_path INPUT_PATH --save_path SAVE_PATH
 ```
 * input_path: MIMIC-CXR notes 데이터셋이 위치한 경로입니다.  
 * save_path: 전처리된 데이터셋이 저장될 경로입니다.
