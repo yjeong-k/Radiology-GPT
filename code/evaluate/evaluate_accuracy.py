@@ -29,21 +29,19 @@ prompt = """You are an intelligent clinical language model.
 {answers}
 Above, we provide you a radiology report and the question that the healthcare professional gave about the radiology report.
 You are also provided with {num_samples} corresponding responses from {num_samples} different clinical models.
-Your task is to read the radiology report and the question carefully then find the answer to the question. 
-Then, compare your answer with each model's response and evaluate the response based on the following criteria.
+Your task is to compare each model's responses and evaluate the response's accuracy based on the following criteria.
 
 Criteria : 
-1. Unacceptable (1 point): The model's response contains numerous inaccuracies, including incorrect information, misinterpretations, or factual errors that significantly impact the reliability of the output. If the question was unanswerable, the model did not acknowledge this and outputs wrong answer.
-2. Poor (2 points): The model's response has some inaccuracies, with notable errors or omissions that affect the overall reliability of the information provided.
-3. Satisfactory (3 points): The model's response is generally accurate but may have minor inaccuracies or omissions that do not critically compromise the reliability of the information.
-4. Excellent (4 points): The model's response is entirely accurate, providing information that is correct, precise, and aligned with the given question. There are no inaccuracies or omissions that impact the reliability of the output. If the question was unanswerable, the model correctly acknowledged this and says that it is unanswerable.
+1. Unacceptable (1 point): The model's response contains numerous inaccuracies, including incorrect information, misinterpretations, or factual errors that significantly impact the reliability of the output.
+2. Poor (2 points): The model's response contains incorrect information that differs from the provided report.
+3. Satisfactory (3 points): The model's response is generally accurate but may have unclear or unnecessary information.
+4. Excellent (4 points): The model's response is entirely accurate, providing information that is correct. Any unclear or unnecessary explanations have been removed from the answer. 
 
 When evaluating each score based on above criteria, ensure that each judgement is not affected by other model's response.
 First line must contain only {num_samples} values, which indicate the score for each model, respectively.
 The {num_samples} scores are separated by a space.
 Output scores without explanation.
 """
-
 
 def generate_prompt(report, question, samples):
     answers = ""
@@ -104,7 +102,7 @@ def main():
         random.shuffle(order)
 
         report = row["report"]
-        question = row["instruction"]
+        question = row["question"]
         samples = row[answer_cols].values[order]
 
         prompt = generate_prompt(report, question, samples)
@@ -123,7 +121,7 @@ def main():
                 model_name = "_".join(col.split("_")[:-1])
                 row[f"{model_name}_score"] = splitted_answer[order.index(idx)]
 
-        row["gpt_response"] = answer
+        row["gpt4_response"] = answer
         all_results.append(row.to_dict())
 
     save_results(all_results, args.save_path)
