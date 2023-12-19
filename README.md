@@ -1,12 +1,15 @@
 # radiology-GPT
 
 ## Introduction
+<img width="1017" alt="스크린샷 2023-12-19 오후 11 06 40" src="https://github.com/yjeong-k/radiology-GPT/assets/75728717/ac0b19fd-28fc-4922-98ee-5c68354a264a">  
 
 방사선 판독보고서 데이터로 파인튜닝한 의료 도메인의 챗봇입니다.  
 
 * Base Model: [Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)  
 * Dataset: [MIMIC-CXR](https://physionet.org/content/mimic-cxr/2.0.0/) 약 160k개의 노트를 사용하였습니다.  
-* Method: Alpaca의 Instruction-following 방식으로 학습을 진행하였습니다. 데이터의 생성에는 GPT-3.5 turbo API를 이용하였습니다.
+
+Alpaca의 Instruction-following 방식으로 학습을 진행하였습니다.  
+데이터 생성에는 GPT-3.5 turbo API를 이용하였습니다.  
 
 
 ## How to Use
