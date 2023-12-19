@@ -1,4 +1,5 @@
-""" This code is modification of asclepius: https://github.com/starmpcc/Asclepius/blob/main/src/utils.py
+"""
+This code is modification of asclepius: https://github.com/starmpcc/Asclepius/blob/main/src/utils.py
 """
 
 from dataclasses import dataclass, field
@@ -8,8 +9,6 @@ import io
 import json
 import transformers
 from transformers import Trainer
-
-
 
 def jload(f, mode="r"):
     """Load a .json file into a dictionary."""
