@@ -4,8 +4,9 @@
 
 방사선 판독보고서 데이터로 파인튜닝한 의료 도메인의 챗봇입니다.  
 
-* Base Model: [Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf).
-* Dataset: [MIMIC-CXR](https://physionet.org/content/mimic-cxr/2.0.0/).
+* Base Model: [Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)  
+* Dataset: [MIMIC-CXR](https://physionet.org/content/mimic-cxr/2.0.0/) 약 160k개의 노트를 사용하였습니다.  
+* Method: Alpaca의 Instruction-following 방식으로 학습을 진행하였습니다. 데이터의 생성에는 GPT-3.5 turbo API를 이용하였습니다.
 
 
 ## How to Use
@@ -103,9 +104,7 @@ python inference.py --ft_path CKPT_PATH
 이전에 이루어졌던 대화를 반영하여 답변을 생성하게 됩니다.  
 
 
-# Citation
-
-# Code
+# Reference
 [KAIST Asclepius](https://github.com/starmpcc/Asclepius)  
 [Stanford Alpaca](https://github.com/tatsu-lab/stanford_alpaca)  
 [Open AI](https://github.com/openai/openai-cookbook/tree/main)  
