@@ -21,8 +21,7 @@ from peft import get_peft_model, LoraConfig, TaskType, prepare_model_for_kbit_tr
 import torch
 import transformers
 from torch.utils.data import Dataset
-from trl import Trainer
-
+from trl import SFTTrainer
 from utils import *
 
 
@@ -41,9 +40,6 @@ The response should provide the accurate answer to the instruction, while being 
 {instruction}
 [Instruction End]
 """
-
-
-
 
 def _tokenize_fn(
     strings: Sequence[str], tokenizer: transformers.PreTrainedTokenizer
@@ -160,7 +156,6 @@ def make_supervised_data_module(
 
 
 def train():
-
     # parser
     parser = transformers.HfArgumentParser(
         (ModelArguments, DataArguments, TrainingArguments)
@@ -183,7 +178,6 @@ def train():
 
     tokenizer = modify_special_tokens(tokenizer)
 
-
     peft_config = LoraConfig(
         task_type=TaskType.CAUSAL_LM,
         inference_mode=False,
@@ -195,11 +189,9 @@ def train():
     model = prepare_model_for_kbit_training(model)
     model = get_peft_model(model, peft_config)
 
-
-
     data_module = make_supervised_data_module(tokenizer=tokenizer, data_args=data_args)
 
-    trainer = Trainer(model=model,
+    trainer = SFTTrainer(model=model,
                          args=training_args,
                          **data_module,
                          )

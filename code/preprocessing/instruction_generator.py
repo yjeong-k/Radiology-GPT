@@ -12,7 +12,6 @@ Also, the file size can be loaded into mem
 ## 4. Max_min_token 확인
 ## 5. Task 별 비율 확인
 
-
 import argparse  # for running script from command line
 import asyncio  # for running API calls concurrently
 import json  # for saving results to a jsonl file
@@ -245,7 +244,7 @@ async def main():
     args = parser.parse_args()
 
     if args.save_path is None:
-        args.save_path = args.input_path.replace(".jsonl", "_results.jsonl")
+        args.save_path = args.input_path.replace(".csv", "_results.jsonl")
 
     caller = APICaller(
         requests_filepath=args.input_path,
