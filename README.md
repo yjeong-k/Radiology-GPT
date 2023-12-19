@@ -4,29 +4,29 @@
 
 방사선 판독보고서 데이터로 파인튜닝한 의료 도메인의 챗봇입니다.  
 
-- [Base Model: Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf).
-- [Dataset: MIMIC-CXR](https://physionet.org/content/mimic-cxr/2.0.0/).
-- License: 
+* Base Model: [Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf).
+* Dataset: [MIMIC-CXR](https://physionet.org/content/mimic-cxr/2.0.0/).
+
 
 ## How to Use
 ### Environment
 Dockerfile을 사용하시면 됩니다.  
 
-- Docker Image Build
+* Docker Image Build
 ```bash
 docker build -t hippo:latest .
 ```
 
-- Docker Run Container
+* Docker Run Container
 ```bash
 docker run -v MOUNT_PATH:/workspace --gpus GPU_NUM -it --name "hippo" hippo:latest
 ```
 * -v 옵션을 지정하여 볼륨을 마운트하였습니다. MOUNT_PATH는 컨테이너에 마운트할 로컬 경로를 의미합니다.  
 * --gpus 옵션을 지정하여 사용할 GPU를 지정할 수 있습니다.  
-* -it 옵션을 지정하여 터미널을 이용하여 컨테이너와 상호작용할 수 있습니다.  
+* -it 옵션을 지정하여 터미널을 이용하여 컨테이너와 상호작용할 수 있습니다.
 * "hippo"는 컨테이너의 이름, hippo:latest는 이미지 이름입니다.
 
-- Container 재사용
+* Container 재사용
 실행중인 컨테이너에 재진입하여 작업하는 경우, 다음의 명령어를 사용하시면 됩니다.
 ```bash
 docker exec -it hippo /bin/bash
@@ -38,8 +38,8 @@ hippo는 실행중인 컨테이너의 이름입니다.
 MIMIC-CXR 데이터셋에서 방사선 판독보고서 파일인 notes를 전처리합니다.  
 보고서마다 형식이 제각각이기 때문에, 보고서에서 핵심 정보를 담고 있는  
 
-"EXAMINATION", "HISTORY", "INDICATION", "TECHNIQUE",  
-"COMPARISON", "FINDINGS", "IMPRESSION"  
+** "EXAMINATION", "HISTORY", "INDICATION", "TECHNIQUE",  
+"COMPARISON", "FINDINGS", "IMPRESSION"**  
 
 항목을 중심으로 전처리를 수행하였습니다.
 
