@@ -96,15 +96,16 @@ def inference(
     return output_text
 
 def main():
+    args = parse_args()
     model, tokenizer = load()
     chat_history = []
-    df = pd.read_csv("./checkpoint/supplement100_prompt.csv", index_col = 0)
+    df = pd.read_csv(args.input_path, index_col = 0)
     result = pd.DataFrame()
     for i, row in df.iterrows():
         prompt = row['prompt']
         row.loc["hippo"] = inference(model, tokenizer, prompt, chat_history, SYSTEM_PROMPT)
         result = pd.concat([result, row.to_frame().T])
-    result.to_csv()
+    result.to_csv(args.save_path)
 
 if __name__=="__main__":
     main()
