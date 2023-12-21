@@ -90,11 +90,16 @@ YOUR_HF_TOKEN
 n ## git credential
 ```
 
-fine tuning에는 다음의 명령어를 사용합니다. 파라미터의 값은 조정하시면 됩니다.  
+fine tuning에는 다음의 명령어를 사용합니다.
 
 ```bash
 python train/fine_tuning.py --model_name_or_path "meta-llama/Llama-2-7b-chat-hf" --data_path TRAINING_DATA_PATH --output_dir CKPT_OUTPUT_PATH --num_train_epochs 3 --per_device_train_batch_size 4 --per_device_eval_batch_size 1 --gradient_accumulation_steps 8 --evaluation_strategy "no" --save_strategy "epoch" --learning_rate 2e-4 --weight_decay 0. --warmup_ratio 0.03 --lr_scheduler_type "cosine" --logging_steps 1 --model_max_length 4096 --gradient_checkpointing True --ddp_timeout 18000
 ```
+  
+  
+하이퍼파라미터는 조정하시면 됩니다.  
+각 하이퍼파라미터의 자세한 설명은 [hyperparameter description](https://huggingface.co/docs/transformers/main_classes/trainer#transformers.TrainingArguments)을 참고해주세요!
+
 
 ### Inference
 학습된 모델을 이용하여 답변을 생성하고자 하는 경우, 다음의 명령어를 사용하시면 됩니다.  
