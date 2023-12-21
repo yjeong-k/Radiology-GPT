@@ -79,7 +79,10 @@ python preprocessing/answer_generator.py --input_path INPUT_PATH --save_path SAV
 4. 생성한 Instruction-Answer 쌍을 후처리합니다.  
 ```bash
 python preprocessing/answer_postprocess.py --input_path INPUT_PATH --save_path SAVE_PATH
-```  
+```
+
+Instruction / Answer Generation에 사용한 Prompt는 보고서를 참고해주시면 감사하겠습니다.  
+Prompt는 목적에 맞게 수정하시면 되지만, 최적화가 어느 정도 이루어진 것이라는 점을 참고해주세요!  
 
 
 ### Fine Tuning
