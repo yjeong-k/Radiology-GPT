@@ -128,8 +128,7 @@ Demo 실행 명령어는 다음과 같습니다.
 python demo/demo.py
 ```  
   
-터미널에 출력되는 링크를 클릭하시면, 다음의 인터페이스에서 Hippo를 사용하실 수 있습니다.  
-
+명령어 실행 후 터미널에 출력되는 public url을 클릭하시면 Demo를 사용하실 수 있습니다.  
 
 # Reference
 [KAIST Asclepius](https://github.com/starmpcc/Asclepius)  
