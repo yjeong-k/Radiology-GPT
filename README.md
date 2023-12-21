@@ -32,7 +32,7 @@ docker run -v MOUNT_PATH:/workspace --gpus GPU_NUM -it --name "hippo" hippo:late
 -it 옵션을 지정하여 터미널을 이용하여 컨테이너와 상호작용할 수 있습니다.  
 "hippo"는 컨테이너의 이름, hippo:latest는 이미지 이름입니다.  
 
-* Container 재사용
+* Container 재사용  
 실행중인 컨테이너에 재진입하여 작업하는 경우, 다음의 명령어를 사용하시면 됩니다.
 ```bash
 docker exec -it hippo /bin/bash
