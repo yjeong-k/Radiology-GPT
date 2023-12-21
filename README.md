@@ -140,7 +140,25 @@ medAlpaca(7B)의 답변을 받아오고 싶을 때 사용하시면 됩니다. me
 
 ### Evaluation
 Hippo는 1. Accuracy 2. Conciseness 3. Understandability의 3가지 지표에 기반하여, GPT-4가 1~4점 척도로 점수를 매겨 평가를 수행합니다.  
-GPT-4로부터 각 모델의 답변을 평가하는 경우, Evaluation 내에 있는 모듈들을 활용하시면 됩니다.
+GPT-4로부터 각 모델의 답변을 평가하는 경우, Evaluation 내에 있는 모듈들을 활용하시면 됩니다.  
+
+아래의 모든 모듈을 사용하기 위해서는 `secrets.py` 파일이 필요합니다. 해당 파일은 다음과 같은 내용을 담고 있으며, evaluate_*.py 파일들과 동일한 directory hierarchy에 위치시켜두시면 됩니다.  
+```
+OPENAI_API_KEY = "your API key"  ## GPT4를 사용하기 위한 OpenAI API key
+```  
+또한, argument로 input_path와 save_path를 명시해주셔야 합니다.  
+
+  
+1) evaluate_accuracy.py  
+accuracy를 척도로 평가를 진행하고 싶을 때 사용하시면 됩니다. input csv 파일은 방사선 판독보고서를 'report'라는 열에, 그에 대한 질문을 'question'이라는 열에 담고 있어야 합니다. 또한 비교 평가에 활용될 모델들의 답변은 'modelName_answer'의 열에 저장되어 있습니다. modelName 부분은 자유롭게 지정해주시면 되지만, 끝에는 항상 _answer가 붙어있어야 합니다.
+GPT4의 평가 결과로 도출된 점수들은 modelName_score라는 새로운 열에 저장되어 save_path에 csv 파일로 반환됩니다.
+
+2) evaluate_conciseness.py  
+conciseness를 척도로 평가를 진행하고 싶을 때 사용하시면 됩니다. 세부 사항은 위와 같습니다.
+
+3) evaluate_understandability.py  
+understandability를 척도로 평가를 진행하고 싶을 때 사용하시면 됩니다. 세부 사항은 위와 같습니다. 
+
 
 
 ### Demo
