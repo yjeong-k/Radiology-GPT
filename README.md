@@ -50,7 +50,7 @@ MIMIC-CXR 데이터셋에서 방사선 판독보고서 파일인 notes를 전처
 항목을 중심으로 전처리를 수행하였습니다.
 
 ```bash
-python preprocessing/preprocess_mimic_cxr --input_path INPUT_PATH --save_path SAVE_PATH
+python preprocessing/preprocess_mimic_cxr.py --input_path INPUT_PATH --save_path SAVE_PATH
 
 ```
 * input_path: MIMIC-CXR notes 데이터셋이 위치한 경로입니다.  
