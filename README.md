@@ -114,6 +114,29 @@ python inference/inference.py --ft_path CKPT_PATH
 ### Comparison
 다른 모델들의 답변을 받아 보고 싶으실 경우, Comparison 디렉토리에 있는 모듈들을 활용하시면 됩니다.  
 
+아래의 모든 모듈들은 argument로 input_path와 save_path를 지정해주셔야 합니다.  
+
+1) bard.py  
+바드의 답변을 받아오고 싶을 때 사용하시면 됩니다. 바드에 전송할 prompt를 'prompt'라는 column에 담고있는 csv 파일을 input_path에 명시해주시면, 'bard_answer'이라는 새로운 column에 답변을 저장하여 save_path에 csv 파일로 반환합니다.  
+위 파일을 사용하실 때는 bard_secrets.py라는 파일이 추가적으로 필요합니다. 해당 파일은 bard.py와 동일한 directory hierarchy에 위치해두시면 되며, 아래와 같은 내용을 담고 있습니다.
+```bash
+COOKIE_DICT = {
+    "__Secure-1PSID": "yours",
+    "__Secure-1PSIDTS": "yours",
+}
+```
+크롬에서 바드에 접속하신 후, F12 키를 눌러 개발자 모드로 진입합니다. 이후 쿠키 값 중 `__Secure-1PSID`와 `__Secure-1PSIDTS` 값을 찾아 bard_secrets.py 파일에 넣어 저장해주시면 됩니다.  
+  
+2) llama2.py  
+라마2의 답변을 받아오고 싶을 때 사용하시면 됩니다. 라마2에 전송할 prompt를 'prompt'라는 column에 담고있는 csv 파일을 input_path에 명시해주시면, 'llama2_answer'이라는 새로운 column에 답변을 저장하여 save_path에 csv 파일로 반환합니다.  
+라마2를 사용하기 위해서는 huggingface CLI login이 필요합니다. 앞서 Fine Tuning 섹션에서 설명드린 방법대로 login을 진행해주시면 됩니다.
+
+3) medAlpaca.py  
+medAlpaca(7B)의 답변을 받아오고 싶을 때 사용하시면 됩니다. medAlpaca에 전송할 prompt를 'prompt'라는 column에 담고있는 csv 파일을 input_path에 명시해주시면, 'medAlapca_answer'이라는 새로운 column에 답변을 저장하여 save_path에 csv 파일로 반환합니다.  
+
+4) hippo.py  
+본 프로젝트에서 개발한 hippo의 답변을 받아오고 싶을 때 사용하시면 됩니다. Hippo에 전송할 prompt를 'prompt'라는 column에 담고있는 csv 파일을 input_path에 명시해주시면, 'hippo_answer'이라는 새로운 column에 답변을 저장하여 save_path에 csv 파일로 반환합니다.
+
 
 ### Evaluation
 Hippo는 1. Accuracy 2. Conciseness 3. Understandability의 3가지 지표에 기반하여, GPT-4가 1~4점 척도로 점수를 매겨 평가를 수행합니다.  
