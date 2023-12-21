@@ -1,6 +1,7 @@
 # Hippo: radiology-GPT
 
 ## Introduction
+<img width="511" alt="스크린샷 2023-12-21 오후 5 03 52" src="https://github.com/yjeong-k/radiology-GPT/assets/75728717/eb07ab82-45e7-4d45-9a52-e270fb203148">
 
 Hippo(radiology-GPT)는 방사선 판독보고서 데이터로 파인튜닝한 의료 도메인의 챗봇입니다.  
 Hippo라는 이름은 의학의 아버지 Hippocrates의 이름에서 따 온 것입니다.  
