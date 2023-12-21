@@ -1,6 +1,6 @@
 # Hippo: radiology-GPT
 
-<img width="511" alt="스크린샷 2023-12-21 오후 5 03 52" src="https://github.com/yjeong-k/radiology-GPT/assets/75728717/eb07ab82-45e7-4d45-9a52-e270fb203148" width="720" height="800" >
+<img width="511" alt="스크린샷 2023-12-21 오후 5 03 52" src="https://github.com/yjeong-k/radiology-GPT/assets/75728717/eb07ab82-45e7-4d45-9a52-e270fb203148">
 
 ## Introduction
 Hippo(radiology-GPT)는 방사선 판독보고서 데이터로 파인튜닝한 의료 도메인의 챗봇입니다.  
@@ -116,10 +116,11 @@ GPT-4로부터 각 모델의 답변을 평가하는 경우, Evaluation 내에 �
 
 
 ### Demo
-Hippo의 데모 버전은 demo.py 모듈에 구현되어 있습니다.  
-Gradio 라이브러리를 사용하여 사용자가 채팅 인터페이스로 Hippo를 사용해볼 수 있습니다.  
-(Huggingface chat demo 코드 참조)  
-<img width="1283" alt="스크린샷 2023-12-21 오후 5 41 41" src="https://github.com/yjeong-k/radiology-GPT/assets/75728717/434edb9b-d243-491e-b040-96d28b97b0c3">
+
+<img width="1283" alt="스크린샷 2023-12-21 오후 5 41 41" src="https://github.com/yjeong-k/radiology-GPT/assets/75728717/434edb9b-d243-491e-b040-96d28b97b0c3">  
+
+demo.py 모듈에서는 사용자가 채팅 인터페이스를 통해 Hippo를 사용해 볼 수 있습니다.  
+Demo는 Gradio 라이브러리를 사용하여 구현되었습니다. (Huggingface chat demo 코드 참조)  
 
   
 Demo 실행 명령어는 다음과 같습니다.
