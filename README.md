@@ -62,7 +62,7 @@ Data Generation은 다음의 단계를 거쳐 이루어집니다.
 python instruction_generator.py --input_path INPUT_PATH --save_path SAVE_PATH --api_key API_KEY
 ```  
 이 때 max_requesets/token_per_minute, max_attemps 등 API 세부 설정을 변경하실 수 있습니다.  
-자세한 것은 코드를 참조하세요!  
+세부 파라미터는 코드를 참조하세요!  
   
 2. API Response에서 생성된 Instruction을 후처리합니다.  
 ```bash
@@ -106,8 +106,13 @@ python inference.py --ft_path CKPT_PATH
 해당 모듈에서는 학습된 radiology_GPT가 챗봇 형식으로 사용자와 질의응답을 하게 됩니다.  
 이전에 이루어졌던 대화를 반영하여 답변을 생성하게 됩니다.  
 
+### Comparison
+다른 모델들의 답변을 받아 보고 싶으실 경우, Comparison 디렉토리에 있는 모듈들을 활용하시면 됩니다.  
+
+
 ### Evaluation
-다른 모델들과 
+Hippo는 1. Accuracy 2. Conciseness 3. Understandability의 3가지 지표에 기반하여, GPT-4가 1~4점 척도로 점수를 매겨 평가를 수행합니다.  
+GPT-4로부터 각 모델의 답변을 평가하는 경우, Evaluation 내에 있는 모듈들을 활용하시면 됩니다.
 
 
 # Reference
