@@ -1,4 +1,5 @@
-# Hippo(Radiology-GPT): Real-time Q&A Large Language Model focusing on chest X-ray radiology report
+# Hippo - Radiology-GPT
+### Real-time Q&A Large Language Model focusing on chest X-ray radiology report
 
 <img width="511" alt="스크린샷 2023-12-21 오후 5 03 52" src="https://github.com/yjeong-k/radiology-GPT/assets/75728717/eb07ab82-45e7-4d45-9a52-e270fb203148">
 
