@@ -1,17 +1,19 @@
-# radiology-GPT
+# Hippo: radiology-GPT
 
 ## Introduction
 
-방사선 판독보고서 데이터로 파인튜닝한 의료 도메인의 챗봇입니다.  
+Hippo(radiology-GPT)는 방사선 판독보고서 데이터로 파인튜닝한 의료 도메인의 챗봇입니다.  
+Hippo라는 이름은 의학의 아버지 Hippocrates의 이름에서 따 온 것입니다.  
+
 
 * Base Model: [Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)  
 * Dataset: [MIMIC-CXR](https://physionet.org/content/mimic-cxr/2.0.0/) 약 160k개의 노트를 사용하였습니다.  
-* Method: Alpaca의 Instruction-following 방식으로 학습을 진행하였습니다. 데이터의 생성에는 GPT-3.5 turbo API를 이용하였습니다.
+* Method: Instruction-following(by Stanford Alpaca) 방식으로 학습을 진행하였습니다. 데이터의 생성에는 GPT-3.5 turbo API를 이용하였습니다.
 
 
 ## How to Use
 ### Environment
-Dockerfile을 사용하시면 됩니다.  
+제공드린 Dockerfile을 사용하시면 됩니다.  
 
 * Docker Image Build
 ```bash
@@ -22,10 +24,10 @@ docker build -t hippo:latest .
 ```bash
 docker run -v MOUNT_PATH:/workspace --gpus GPU_NUM -it --name "hippo" hippo:latest
 ```
-* -v 옵션을 지정하여 볼륨을 마운트하였습니다. MOUNT_PATH는 컨테이너에 마운트할 로컬 경로를 의미합니다.  
-* --gpus 옵션을 지정하여 사용할 GPU를 지정할 수 있습니다.  
-* -it 옵션을 지정하여 터미널을 이용하여 컨테이너와 상호작용할 수 있습니다.
-* "hippo"는 컨테이너의 이름, hippo:latest는 이미지 이름입니다.
+-v 옵션을 지정하여 볼륨을 마운트하였습니다. MOUNT_PATH는 컨테이너에 마운트할 로컬 경로를 의미합니다.  
+--gpus 옵션을 지정하여 사용할 GPU를 지정할 수 있습니다.  
+-it 옵션을 지정하여 터미널을 이용하여 컨테이너와 상호작용할 수 있습니다.  
+"hippo"는 컨테이너의 이름, hippo:latest는 이미지 이름입니다.  
 
 * Container 재사용
 실행중인 컨테이너에 재진입하여 작업하는 경우, 다음의 명령어를 사용하시면 됩니다.
@@ -102,6 +104,9 @@ python inference.py --ft_path CKPT_PATH
 
 해당 모듈에서는 학습된 radiology_GPT가 챗봇 형식으로 사용자와 질의응답을 하게 됩니다.  
 이전에 이루어졌던 대화를 반영하여 답변을 생성하게 됩니다.  
+
+### Evaluation
+다른 모델들과 
 
 
 # Reference
