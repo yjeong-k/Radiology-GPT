@@ -12,6 +12,7 @@ Hippo라는 이름은 의학의 아버지 Hippocrates의 이름에서 따 온 �
 * Method: Instruction-following(by Stanford Alpaca) 방식으로 학습을 진행하였습니다. 데이터의 생성에는 GPT-3.5 turbo API를 이용하였습니다.
 
 
+
 ## How to Use
 ### Environment
 제공드린 Dockerfile을 사용하시면 됩니다.  
@@ -49,6 +50,7 @@ MIMIC-CXR 데이터셋에서 방사선 판독보고서 파일인 notes를 전처
 
 ```bash
 python preprocessing/preprocess_mimic_cxr --input_path INPUT_PATH --save_path SAVE_PATH
+
 ```
 * input_path: MIMIC-CXR notes 데이터셋이 위치한 경로입니다.  
 * save_path: 전처리된 데이터셋이 저장될 경로입니다.
@@ -64,7 +66,7 @@ python preprocessing/instruction_generator.py --input_path INPUT_PATH --save_pat
 이 때 max_requesets/token_per_minute, max_attemps 등 API 세부 설정을 변경하실 수 있습니다.  
 세부 파라미터는 코드를 참조하세요!  
   
-2. API Response에서 생성된 Instruction을 후처리합니다.  
+2. API Response에서 생성된 Instruction을 후처리하여, 각 Instruction에 대한 answer를 생성하도록 명령하는 prompt를 생성합니다.
 ```bash
 python preprocessing/postproc_question.py --input_path INPUT_PATH --save_path SAVE_PATH
 ```  

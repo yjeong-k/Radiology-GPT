@@ -1,3 +1,7 @@
+"""
+This code is modification of asclepius: https://github.com/starmpcc/Asclepius
+"""
+
 import argparse
 import random
 import time
@@ -16,7 +20,7 @@ client = OpenAI(
     api_key=OPENAI_API_KEY,
 )
 
-prompt = """You are an intelligent clinical language model. 
+prompt = """You are an intelligent language model. 
 
 [Radiology Report Begin]
 {report}
@@ -27,19 +31,18 @@ prompt = """You are an intelligent clinical language model.
 [Question End]
 
 {answers}
-Above, we provide you a radiology report and the question that the healthcare professional gave about the radiology report.
-You are also provided with {num_samples} corresponding responses from {num_samples} different clinical models.
-Your task is to read the radiology report and the question carefully then find the answer to the question. 
-Then, compare your answer with each model's response and evaluate the response based on the following criteria.
+Above, we provide you a radiology report and the question about the radiology report.
+You are also provided with {num_samples} corresponding responses from {num_samples} different language models.
+Your task is to compare each model's responses and evaluate the response's conciseness based on the following criteria.
+Caution! You must valuate only the brevity of contents.
 
 Criteria:
-1. Unacceptable (1 point): The model's response is verbose and lengthy, containing superfluous details.
-2. Poor (2 points): The model's response is somewhat concise but includes unnecessary details or explanations, making the content less focused.
-3. Satisfactory (3 points): The model's response is generally concise, containing necessary and relevant information, but may have minor instances of verbosity.
-4. Excellent (4 points): The model's response is highly concise and short, containing only necessary and relevant information without any unnecessary details or explanations.
+1. Unacceptable (1 point): The model's response is too long or totally inaccurate.
+2. Poor (2 points): The model's answer is somewhat correct, but the explanation is too long. There are sentences that can be deleted, or sentences with the same content can be changed to be shorter.
+3. Satisfactory (3 points): The model's answer is correct. But there is a shorter way to explain the same thing.
+4. Excellent (4 points): The model's answer is short and precise. It does not give long-winded explanations or mention unnecessary details.
 
 When evaluating each score based on above criteria, ensure that each judgement is not affected by other model's response.
-However, you can compare each model's responses in terms of relative verbosity and response length when scoring each response.
 First line must contain only {num_samples} values, which indicate the score for each model, respectively.
 The {num_samples} scores are separated by a space.
 Output scores without explanation.
@@ -105,7 +108,7 @@ def main():
         random.shuffle(order)
 
         report = row["report"]
-        question = row["instruction"]
+        question = row["question"]
         samples = row[answer_cols].values[order]
 
         prompt = generate_prompt(report, question, samples)

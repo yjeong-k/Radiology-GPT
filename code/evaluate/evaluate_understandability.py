@@ -1,3 +1,7 @@
+"""
+This code is modification of asclepius: https://github.com/starmpcc/Asclepius
+"""
+
 import argparse
 import random
 import time
@@ -16,7 +20,7 @@ client = OpenAI(
     api_key=OPENAI_API_KEY,
 )
 
-prompt = """You are an intelligent clinical language model. 
+prompt = """You are an intelligent language model. 
 
 [Radiology Report Begin]
 {report}
@@ -27,16 +31,15 @@ prompt = """You are an intelligent clinical language model.
 [Question End]
 
 {answers}
-Above, we provide you a radiology report and the question that the healthcare professional gave about the radiology report.
-You are also provided with {num_samples} corresponding responses from {num_samples} different clinical models.
-Your task is to read the radiology report and the question carefully then find the answer to the question. 
-Then, compare your answer with each model's response and evaluate the response based on the following criteria.
+Above, we provide you a radiology report and the question about the radiology report.
+You are also provided with {num_samples} corresponding responses from {num_samples} different language models.
+Your task is to compare each model's responses and evaluate the response's understandability based on the following criteria.
 
-Criteria :
-1. Unacceptable (1 point): The model's response lacks logical flow and coherence, with content that does not follow a clear and sensible progression.
-2. Poor (2 points): The model's response exhibits some coherence but includes significant lapses in logical structure, making it difficult to follow the intended meaning.
-3. Satisfactory (3 points): The model's response maintains a generally logical and coherent structure but may have minor lapses or inconsistencies in the flow of information.
-4. Excellent (4 points): The model's response is logically structured from beginning to end, demonstrating a clear and coherent progression of information.
+Criteria:
+1. Unacceptable (1 point): The model's answers mostly consist of medical terms that are difficult for non-medical experts to interpret.
+2. Poor (2 points): The model's answers are difficult for non-medical experts to understand. Even though there are difficult medical terms, no explanation is provided.
+3. Satisfactory (3 points): The model's answers can be understood to some extent by non-medical experts. Some difficult medical terms are explained.
+4. Excellent (4 points): The model's answers can be easily understood even by non-medical experts. If there is difficult medical terminology in the answer, an explanation is also provided.
 
 When evaluating each score based on above criteria, ensure that each judgement is not affected by other model's response.
 First line must contain only {num_samples} values, which indicate the score for each model, respectively.
@@ -104,7 +107,7 @@ def main():
         random.shuffle(order)
 
         report = row["report"]
-        question = row["instruction"]
+        question = row["question"]
         samples = row[answer_cols].values[order]
 
         prompt = generate_prompt(report, question, samples)
@@ -123,7 +126,7 @@ def main():
                 model_name = "_".join(col.split("_")[:-1])
                 row[f"{model_name}_score"] = splitted_answer[order.index(idx)]
 
-        row["gpt_response"] = answer
+        row["gpt4_response"] = answer
         all_results.append(row.to_dict())
 
     save_results(all_results, args.save_path)

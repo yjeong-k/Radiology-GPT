@@ -1,12 +1,22 @@
-""" This code is modification of asclepius: https://github.com/starmpcc/Asclepius/blob/main/src/utils.py
+"""
+This code is modification of asclepius: https://github.com/starmpcc/Asclepius/blob/main/src/utils.py
 """
 
 from dataclasses import dataclass, field
 from typing import Optional
 
+import io
+import json
 import transformers
 from transformers import Trainer
 
+def jload(f, mode="r"):
+    """Load a .json file into a dictionary."""
+    if not isinstance(f, io.IOBase):
+        f = open(f, mode=mode)
+    jdict = json.load(f)
+    f.close()
+    return jdict
 
 def modify_special_tokens(tokenizer):
     tokenizer.add_special_tokens(
