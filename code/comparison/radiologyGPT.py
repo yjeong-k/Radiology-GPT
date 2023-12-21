@@ -103,7 +103,7 @@ def main():
     result = pd.DataFrame()
     for i, row in df.iterrows():
         prompt = row['prompt']
-        row.loc["hippo"] = inference(model, tokenizer, prompt, chat_history, SYSTEM_PROMPT)
+        row.loc["hippo_answer"] = inference(model, tokenizer, prompt, chat_history, SYSTEM_PROMPT)
         result = pd.concat([result, row.to_frame().T])
     result.to_csv(args.save_path)
 
