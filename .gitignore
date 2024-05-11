@@ -1,2 +1,6 @@
 secrets.py
 .DS_Store
+./code/preprocessing/cxr-study-list.csv
+./code/preprocessing/notes.csv
+./code/preprocessing/output.jsonl
+./code/processed_output.jsonl

@@ -5,12 +5,24 @@ thus, simply ignore rpm cases
 Also, the file size can be loaded into mem
 """
 
-##TODO: Checklist
-## 1. API KEY 확인
-## 2. Output 주소 확인
-## 3. Note Index 제대로 들어갔는지 확인
-## 4. Max_min_token 확인
-## 5. Task 별 비율 확인
+"""
+TODO: Checklist
+1. API KEY 확인
+2. Output 주소 확인
+3. Task 별 비율 확인 (중요)
+    *Task별로 가중치 변경이 필요할 경우*
+    - 코드를 수정하지 않을 경우 default는 task별로 1/4
+    - 변경이 필요할 경우:
+    run() 함수의 df["idx"] = df.apply(lambda x: random.choices([0, 1, 2, 3], weights=[0.25, 0.25, 0.25, 0.25])[0], axis=1)에서
+    weights의 값을 변경. 순서대로 "Question Answering", "Abbreviation Expansion", "Paraphrasing", "Summarization"
+
+4. Note Index 제대로 들어갔는지 확인 (중요)
+    *data의 일부만 사용할 경우*
+    - data가 워낙 방대하기 때문에 instruction을 한꺼번에 생성하는 것은 지양
+    - 코드를 수정하지 않을 경우 default값은 처음 10000개만 사용
+    - run() 함수의 tasks = [self.await_and_call(i) for i in data[:10000]]에서 data의 슬라이싱을 수정
+5. Max_min_token 확인
+"""
 
 import argparse  # for running script from command line
 import asyncio  # for running API calls concurrently
@@ -119,10 +131,9 @@ class APICaller:
         df = pd.read_csv(self.requests_filepath)
         if "TEXT" in df.columns:
             df.rename(columns={"TEXT": "note"}, inplace=True)
-        df["idx"] = df.apply(lambda x: random.choices([0, 1, 2, 3], weights=[0.5, 0.0, 0.25, 0.25])[0], axis=1)
+        df["idx"] = df.apply(lambda x: random.choices([0, 1, 2, 3], weights=[0.25, 0.25, 0.25, 0.25])[0], axis=1)
         data = df[["note", "idx"]].to_dict(orient="records")
-        ##tasks = [self.await_and_call(i) for i in data[20000:30000]]
-        tasks = [self.await_and_call(i) for i in data[60000:70000]]
+        tasks = [self.await_and_call(i) for i in data[:10000]]
         await asyncio.gather(*tasks)
 
     async def await_and_call(self, request):
