@@ -133,7 +133,7 @@ class APICaller:
             df.rename(columns={"TEXT": "note"}, inplace=True)
         df["idx"] = df.apply(lambda x: random.choices([0, 1, 2, 3], weights=[0.25, 0.25, 0.25, 0.25])[0], axis=1)
         data = df[["note", "idx"]].to_dict(orient="records")
-        tasks = [self.await_and_call(i) for i in data[:1000]]
+        tasks = [self.await_and_call(i) for i in data[:10000]]
         await asyncio.gather(*tasks)
 
     async def await_and_call(self, request):
